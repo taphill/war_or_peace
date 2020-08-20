@@ -34,18 +34,22 @@ private
     end
   end
 
+  def player_deck_empty?
+    @player1.deck.cards.empty? || @player2.deck.cards.empty?
+  end
+
   def turn
     until player_deck_empty? || @turn_number == 20
       @turn_number += 1
       turn = Turn.new(@player1, @player2)
       turn.pile_cards
-      puts "Turn #{@turn_number}: #{turn.winner.name} won #{turn.spoils_of_war.length} #{turn.type}"
+      turn_console_message(turn)
       turn.award_spoils(turn.winner) unless turn.winner == 'No Winner'
     end
   end
-
-  def player_deck_empty?
-    @player1.deck.cards.empty? || @player2.deck.cards.empty?
+  
+  def turn_console_message(turn)
+    puts "Turn #{@turn_number}: #{turn.winner.name} won #{turn.spoils_of_war.length} #{turn.type}"
   end
 
 end
