@@ -10,7 +10,7 @@ class StartGame
   def start
     intro
     user_ready?
-    puts "\n\n*~*~*~* #{winner?} has won the game! *~*~*~*"
+    who_won?
   end
 
 private
@@ -31,7 +31,7 @@ private
     end
 
     return turn if user_input.upcase == 'GO'
-    return nil if user_input.downcase == 'q'
+    return puts "\nGoodbye." if user_input.downcase == 'q'
   end
 
   def turn
@@ -49,9 +49,14 @@ private
     @player1.has_lost? || @player2.has_lost?
   end
 
-  def winner?
-    return @player2.name if @player1.has_lost?
-    return @player1.name if @player2.has_lost?
+  def who_won?
+    if @player1.has_lost?
+      puts "\n\n*~*~*~* #{@player1.name} has won the game! *~*~*~*"
+    elsif @player2.has_lost?
+      puts "\n\n*~*~*~* #{@player2.name} has won the game! *~*~*~*"
+    else
+      nil
+    end
   end
 
 end
