@@ -30,7 +30,7 @@ class Turn
   def award_spoils
     return "No spoils to award" if @type == :mutually_assured_destruction
 
-    @spoils_of_war.each do |card|
+    @spoils_of_war.shuffle.each do |card|
       @winner.deck.add_card(card)
     end
   end
