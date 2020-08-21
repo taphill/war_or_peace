@@ -54,6 +54,7 @@ class Turn
 private
 
   def mutually_assured_destruction?
+    return war? if @player1.deck_size < 3 || @player2.deck_size < 3
     war? && (@player1.card_at_2 == @player2.card_at_2)
   end
 
