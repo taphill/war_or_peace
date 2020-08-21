@@ -48,7 +48,7 @@ class Turn
 
     print "won #{@spoils_of_war.length} cards"
 
-    print " ------- #{@player1.name} deck = #{@player1.deck_size} +++ #{@player2.name} deck = #{@player2.deck_size}"
+    print " \t\t------- #{@player1.name} deck = #{@player1.deck_size} ~~~ #{@player2.name} deck = #{@player2.deck_size}"
   end
 
 private
