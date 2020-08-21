@@ -1,4 +1,4 @@
-class Turn
+class Turn #Git test
   attr_reader :player1, :player2, :type, :spoils_of_war
 
   def initialize(player1, player2)
