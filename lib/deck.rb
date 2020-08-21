@@ -29,6 +29,10 @@ class Deck
     @cards << card
   end
 
+  def size
+    @cards.length
+  end
+
 private
 
   def update_high_ranking_cards
