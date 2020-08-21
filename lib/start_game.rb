@@ -34,18 +34,18 @@ private
   end
 
   def turn
-    until player_deck_empty? || @turn_number == 20
+    until player_lost? || @turn_number == 50_000
       turn = Turn.new(@player1, @player2)      
       @turn_number += 1
       turn.pile_cards
-      turn.award_spoils
       print "\nTurn #{@turn_number}: "
       turn.turn_console_message
+      turn.award_spoils
     end
   end
 
-  def player_deck_empty?
-    @player1.deck.cards.empty? || @player2.deck.cards.empty?
+  def player_lost?
+    @player1.has_lost? || @player2.has_lost?
   end
 
 end

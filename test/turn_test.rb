@@ -197,4 +197,18 @@ class TurnTest < Minitest::Test
     assert_equal [card1, card2, card5, card4, card3, card6], turn.spoils_of_war
   end
 
+  def test_MAD
+    player1 = Player.new("Megan", deck_default)
+    player2 = Player.new("Aurora", deck_MAD)
+
+    turn = Turn.new(player1, player2)
+
+    turn.pile_cards
+
+    assert_equal "No spoils to award", turn.award_spoils
+    assert_equal [card8], player1.deck.cards
+    assert_equal [card7], player2.deck.cards
+  end
+
+
 end

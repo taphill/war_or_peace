@@ -1,5 +1,5 @@
 class Turn
-  attr_reader :player1, :player2, :spoils_of_war
+  attr_reader :player1, :player2, :type, :spoils_of_war
 
   def initialize(player1, player2)
     @player1 = player1
@@ -46,7 +46,7 @@ class Turn
       print "ERROR"
     end
 
-    print "won #{@spoils_of_war.length} #{@type}"
+    print "won #{@spoils_of_war.length} cards"
 
     print " ------- #{@player1.name} deck = #{@player1.deck_size} +++ #{@player2.name} deck = #{@player2.deck_size}"
   end
@@ -54,21 +54,19 @@ class Turn
 private
 
   def mutually_assured_destruction?
-    card3 = (@player1.deck.rank_of_card_at(2) == @player2.deck.rank_of_card_at(2))
-
-    war? && card3
+    war? && (@player1.card_at_2 == @player2.card_at_2)
   end
 
   def war?
-    @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0)
+    @player1.card_at_0 == @player2.card_at_0
   end
 
   def basic?
-    @player1.deck.rank_of_card_at(0) != @player2.deck.rank_of_card_at(0)
+    @player1.card_at_0 != @player2.card_at_0
   end
 
   def war_winner
-    if @player1.deck.rank_of_card_at(2) > @player2.deck.rank_of_card_at(2)
+    if @player1.card_at_2 > @player2.card_at_2
       @player1
     else
       @player2
@@ -76,7 +74,7 @@ private
   end
 
   def basic_winner
-    if @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
+    if @player1.card_at_0 > @player2.card_at_0
       @player1
     else
       @player2
@@ -84,18 +82,18 @@ private
   end
 
   def mutually_assured_destruction_pile
-    3.times { @player1.deck.remove_card }
-    3.times { @player2.deck.remove_card }
+    3.times { @player1.remove_card_from_deck }
+    3.times { @player2.remove_card_from_deck }
   end
 
   def war_pile
-    3.times { @spoils_of_war << @player1.deck.remove_card }
-    3.times { @spoils_of_war << @player2.deck.remove_card }
+    3.times { @spoils_of_war << @player1.remove_card_from_deck }
+    3.times { @spoils_of_war << @player2.remove_card_from_deck }
   end
 
   def basic_pile
-    @spoils_of_war << @player1.deck.remove_card 
-    @spoils_of_war << @player2.deck.remove_card
+    @spoils_of_war << @player1.remove_card_from_deck 
+    @spoils_of_war << @player2.remove_card_from_deck
   end
 
 end
