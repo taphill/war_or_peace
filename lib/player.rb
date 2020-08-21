@@ -9,4 +9,8 @@ class Player
   def has_lost?
     @deck.cards.empty? ? true : false
   end
+
+  def deck_size
+    @deck.size
+  end
 end

@@ -37,29 +37,11 @@ private
     until player_deck_empty? || @turn_number == 20
       turn = Turn.new(@player1, @player2)      
       @turn_number += 1
-#require 'pry'; binding.pry if turn.type == :war
       turn.pile_cards
-require 'pry'; binding.pry if turn.type == :war
-      turn_console_message(turn)
-      turn.award_spoils(turn.winner) unless turn.winner == 'No Winner'
+      turn.award_spoils
+      print "\nTurn #{@turn_number}: "
+      turn.turn_console_message
     end
-  end
-  
-  def turn_console_message(turn)
-    print "\nTurn #{@turn_number}: "
-
-    if turn.type == :basic
-      print "#{turn.winner.name} "
-    elsif turn.type == :war
-      print "WAR - #{turn.winner.name} "
-    elsif turn.type == :mutually_assured_destruction
-      return print "*mutually assured destruction* 6 cards removed from play"
-    else
-      print "ERROR"
-    end
-
-    print "won #{turn.spoils_of_war.length} #{turn.type}"
-    print " ------- #{@player1.name} deck = #{@player1.deck.cards.size} +++ #{@player2.name} deck = #{@player2.deck.cards.size}"
   end
 
   def player_deck_empty?

@@ -4,42 +4,59 @@ class Turn
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
+    @type = set_type
+    @winner = set_winner
     @spoils_of_war = []
   end
 
-  def type
+  def set_type
     return :mutually_assured_destruction if mutually_assured_destruction?
     return :war if war?
     return :basic if basic?
   end
 
-  def winner
-    return "No Winner" if mutually_assured_destruction?
-    return war_winner if war?
-    return basic_winner if basic?
+  def set_winner
+    return "No Winner" if @type == :mutually_assured_destruction
+    return war_winner if @type == :war
+    return basic_winner if @type == :basic
   end
 
   def pile_cards
-    return mutually_assured_destruction_pile if mutually_assured_destruction?
-    return war_pile if war?
-    return basic_pile if basic?
+    return mutually_assured_destruction_pile if @type == :mutually_assured_destruction
+    return war_pile if @type == :war
+    return basic_pile if @type == :basic
   end
 
-  def award_spoils(winner_of_turn)
-    return "No spoils to award" if @spoils_of_war.empty?
+  def award_spoils
+    return "No spoils to award" if @type == :mutually_assured_destruction
 
     @spoils_of_war.each do |card|
-      winner_of_turn.deck.cards << card
+      @winner.deck.add_card(card)
     end
+  end
+
+  def turn_console_message
+    if @type == :basic
+      print "#{@winner.name} "
+    elsif @type == :war
+      print "WAR - #{@winner.name} "
+    elsif @type == :mutually_assured_destruction
+      return print "*mutually assured destruction* 6 cards removed from play"
+    else
+      print "ERROR"
+    end
+
+    print "won #{@spoils_of_war.length} #{@type}"
+
+    print " ------- #{@player1.name} deck = #{@player1.deck_size} +++ #{@player2.name} deck = #{@player2.deck_size}"
   end
 
 private
 
   def mutually_assured_destruction?
-    card1 = (@player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0)) 
     card3 = (@player1.deck.rank_of_card_at(2) == @player2.deck.rank_of_card_at(2))
 
-    card1 && card3
+    war? && card3
   end
 
   def war?
