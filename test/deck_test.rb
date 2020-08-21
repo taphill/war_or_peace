@@ -10,7 +10,7 @@ class DeckTest < Minitest::Test
     assert_instance_of Deck, deck
   end
 
-  def test_it_creates_a_deck_with_cards
+  def test_it_has_attributes
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
@@ -19,6 +19,17 @@ class DeckTest < Minitest::Test
     deck = Deck.new(cards)
 
     assert_instance_of Array, deck.cards
+  end
+
+  def it_has_a_size
+    card1 = Card.new(:diamond, 'Queen', 12)
+    card2 = Card.new(:spade, '3', 3)
+    card3 = Card.new(:heart, 'Ace', 14)
+    cards = [card1, card2, card3]
+
+    deck = Deck.new(cards)
+
+    assert_equal 3, deck.size
   end
 
   def test_it_can_find_the_rank_of_a_card
@@ -44,7 +55,7 @@ class DeckTest < Minitest::Test
     assert_equal [card1, card3], deck.high_ranking_cards
   end
 
-  def test_it_returns_precentage_of_high_ranking_cards
+  def test_it_can_return_precentage_of_high_ranking_cards
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
