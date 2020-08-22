@@ -13,30 +13,29 @@ class CardGenerator
       next if line.chop.empty?
       line.downcase
 
-      suit = line.scan(/heart|club|diamond|spade/).pop
-      value = line.scan(/^[\w\-]+/).pop
-      rank = line.scan(/[0-9][0-9]|[0-9]/).pop.to_i
-
-      @cards << Card.new(set_suit(suit), value, rank)
+      @cards << Card.new(get_suit(line), get_value(line), get_rank(line))
     end
-require 'pry'; binding.pry
   end
 
 private
+
+  def get_suit(line)
+    set_suit(line.scan(/heart|club|diamond|spade/).pop)
+  end
+
+  def get_value(line)
+    line.scan(/^[\w\-]+/).pop
+  end
+
+  def get_rank(line)
+    line.scan(/[0-9][0-9]|[0-9]/).pop.to_i
+  end
 
   def set_suit(suit)
     return :heart if suit == "heart"
     return :club if suit == "club"
     return :diamond if suit == "diamond"
     return :spade if suit == "spade"
-  end
-
-  def set_value(value)
-
-  end
-
-  def set_rank(rank)
-
   end
 
 end
