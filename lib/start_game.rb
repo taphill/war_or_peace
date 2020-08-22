@@ -51,9 +51,9 @@ private
 
   def who_won?
     if @player1.has_lost?
-      puts "\n\n*~*~*~* #{@player1.name} has won the game! *~*~*~*"
-    elsif @player2.has_lost?
       puts "\n\n*~*~*~* #{@player2.name} has won the game! *~*~*~*"
+    elsif @player2.has_lost?
+      puts "\n\n*~*~*~* #{@player1.name} has won the game! *~*~*~*"
     else
       nil
     end
