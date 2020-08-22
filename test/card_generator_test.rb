@@ -28,4 +28,13 @@ class CardGeneratorTest < Minitest::Test
 
     assert_instance_of Card, deck.cards[0]
   end
+
+  def test_it_can_create_52_cards
+    filename = "cards.txt"
+
+    deck = CardGenerator.new(filename)
+    deck.create_cards
+
+    assert_equal 52, deck.cards.length
+  end
 end
