@@ -6,16 +6,16 @@ class CardGeneratorTest < Minitest::Test
   def test_it_exists
     filename = "cards.txt"
 
-    cards = CardGenerator.new(filename)
+    deck = CardGenerator.new(filename)
 
-    assert_instance_of CardGenerator, cards
+    assert_instance_of CardGenerator, deck
   end
 
-  def test_it_can_read_file
+  def test_it_has_attributes
     filename = "cards.txt"
 
-    cards = CardGenerator.new(filename)
+    deck = CardGenerator.new(filename)
   
-    cards.create_cards
+    assert_equal [], deck.cards
   end
 end
