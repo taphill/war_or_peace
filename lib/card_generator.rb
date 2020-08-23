@@ -24,7 +24,7 @@ private
   end
 
   def get_value(line)
-    line.scan(/^[\w\-]+/).pop
+    line.scan(/^[\w]*/).pop
   end
 
   def get_rank(line)
