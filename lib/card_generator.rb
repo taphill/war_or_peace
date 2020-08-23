@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require './lib/card'
 
+# This class will read a text file and generate the cards from that file
 class CardGenerator
   attr_reader :cards
 
@@ -11,16 +14,16 @@ class CardGenerator
   def create_cards
     File.open(@file).each do |line|
       next if line.chop.empty?
-      line.downcase
 
+      line.downcase
       @cards << Card.new(get_suit(line), get_value(line), get_rank(line))
     end
   end
 
-private
+  private
 
   def get_suit(line)
-    set_suit(line.scan(/heart|club|diamond|spade/).pop)
+    suit(line.scan(/heart|club|diamond|spade/).pop)
   end
 
   def get_value(line)
@@ -31,11 +34,10 @@ private
     line.scan(/[0-9][0-9]|[0-9]/).pop.to_i
   end
 
-  def set_suit(suit)
-    return :heart if suit == "heart"
-    return :club if suit == "club"
-    return :diamond if suit == "diamond"
-    return :spade if suit == "spade"
+  def suit(suit)
+    return :heart if suit == 'heart'
+    return :club if suit == 'club'
+    return :diamond if suit == 'diamond'
+    return :spade if suit == 'spade'
   end
-
 end

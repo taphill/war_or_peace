@@ -1,5 +1,10 @@
+# frozen_string_literal: true
+
 require './lib/turn'
 
+# This class will handle most of of console messages and logic of console messages
+# Start will be called to begin the game
+# The turn loop will conitnue creating turns until there is a winner or 1,000,000 turns
 class StartGame
   def initialize(player1, player2)
     @player1 = player1
@@ -13,7 +18,7 @@ class StartGame
     who_won?
   end
 
-private
+  private
 
   def intro
     puts "\nWelcome to War! (or Peace) This game will be played with 52 cards.
@@ -24,7 +29,7 @@ private
 
   def user_ready?
     user_input = gets.chomp
-    
+
     until user_input.upcase == 'GO' || user_input.downcase == 'q'
       puts "Type 'GO' if you're ready! Press 'q' to quit."
       user_input = gets.chomp
@@ -36,7 +41,7 @@ private
 
   def turn
     until player_lost? || @turn_number == 1_000_000
-      turn = Turn.new(@player1, @player2)      
+      turn = Turn.new(@player1, @player2)
       @turn_number += 1
       turn.pile_cards
       print "\nTurn #{@turn_number}: "
@@ -46,9 +51,9 @@ private
   end
 
   def who_won?
-    if @player1.has_lost?
+    if @player1.lost?
       puts "\n\n*~*~*~* #{@player2.name} has won the game! *~*~*~*"
-    elsif @player2.has_lost?
+    elsif @player2.lost?
       puts "\n\n*~*~*~* #{@player1.name} has won the game! *~*~*~*"
     elsif @turn_number < 1
       nil
@@ -58,7 +63,6 @@ private
   end
 
   def player_lost?
-    @player1.has_lost? || @player2.has_lost?
+    @player1.lost? || @player2.lost?
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/card'
@@ -30,7 +32,6 @@ class StartGameTest < Minitest::Test
   # Use this deck to start a mutually assured destruction turn
   let(:deck_MAD) { Deck.new([card4, card3, card9, card7]) }
 
-
   def test_it_exists
     player1 = Player.new("Megan", deck_default)
     player2 = Player.new("Aurora", deck_basic)
@@ -47,9 +48,7 @@ class StartGameTest < Minitest::Test
     start_game = StartGame.new(player1, player2)
 
     start_game.start
-    
+
     assert_instance_of StartGame, start_game
-
   end
-
 end

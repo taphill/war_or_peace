@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Create a Player with a name and deck
+# Rank of Player cards can be determined a size of deck can be checked
 class Player
   attr_reader :name, :deck
 
@@ -6,7 +10,7 @@ class Player
     @deck = deck
   end
 
-  def has_lost?
+  def lost?
     @deck.cards.empty? ? true : false
   end
 

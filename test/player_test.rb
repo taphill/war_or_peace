@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/card'
@@ -67,13 +69,13 @@ class PlayerTest < Minitest::Test
 
     player = Player.new('Clarisa', deck)
 
-    refute player.has_lost?
+    refute player.lost?
     player.deck.remove_card
-    refute player.has_lost?
+    refute player.lost?
     player.deck.remove_card
-    refute player.has_lost?
+    refute player.lost?
     player.deck.remove_card
-    assert player.has_lost?
+    assert player.lost?
     assert player.deck.cards.empty?
   end
 end
