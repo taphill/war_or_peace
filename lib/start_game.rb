@@ -46,9 +46,9 @@ private
   end
 
   def who_won?
-    if @player1.has_lost?
+    if @player1.lost?
       puts "\n\n*~*~*~* #{@player2.name} has won the game! *~*~*~*"
-    elsif @player2.has_lost?
+    elsif @player2.lost?
       puts "\n\n*~*~*~* #{@player1.name} has won the game! *~*~*~*"
     elsif @turn_number < 1
       nil
@@ -58,7 +58,6 @@ private
   end
 
   def player_lost?
-    @player1.has_lost? || @player2.has_lost?
+    @player1.lost? || @player2.lost?
   end
-
 end
