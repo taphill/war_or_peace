@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/card'
@@ -5,7 +7,7 @@ require './lib/card_generator'
 
 class CardGeneratorTest < Minitest::Test
   def test_it_exists
-    filename = "cards.txt"
+    filename = 'cards.txt'
 
     deck = CardGenerator.new(filename)
 
@@ -13,15 +15,15 @@ class CardGeneratorTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    filename = "cards.txt"
+    filename = 'cards.txt'
 
     deck = CardGenerator.new(filename)
-  
+
     assert_equal [], deck.cards
   end
 
   def test_it_can_create_a_card
-    filename = "cards.txt"
+    filename = 'cards.txt'
 
     deck = CardGenerator.new(filename)
     deck.create_cards
@@ -30,7 +32,7 @@ class CardGeneratorTest < Minitest::Test
   end
 
   def test_it_can_create_52_cards
-    filename = "cards.txt"
+    filename = 'cards.txt'
 
     deck = CardGenerator.new(filename)
     deck.create_cards
