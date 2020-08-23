@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Class to create a deck filled with cards.
+# Cards can be added or removed from the deck and rank of card can be determined.
 class Deck
   attr_accessor :cards
 
@@ -17,7 +21,7 @@ class Deck
 
   def percent_high_ranking
     update_high_ranking_cards
-    ((@high_ranking_cards.size.to_f / @cards.size.to_f) * 100.0).round(2)
+    ((@high_ranking_cards.size / @cards.size).to_f * 100.0).round(2)
   end
 
   def remove_card
@@ -33,14 +37,13 @@ class Deck
     @cards.length
   end
 
-private
+  private
 
   def update_high_ranking_cards
     cards.each do |card|
       if card.rank >= 11 && @high_ranking_cards.include?(card) == false
-        @high_ranking_cards << card 
+        @high_ranking_cards << card
       end
     end
   end
-
 end
