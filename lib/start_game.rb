@@ -35,7 +35,7 @@ private
   end
 
   def turn
-    until player_lost? || @turn_number == 10
+    until player_lost? || @turn_number == 1_000_000
       turn = Turn.new(@player1, @player2)      
       @turn_number += 1
       turn.pile_cards
