@@ -35,7 +35,7 @@ private
   end
 
   def turn
-    until player_lost? || @turn_number == 1_000_000
+    until player_lost? || @turn_number == 10
       turn = Turn.new(@player1, @player2)      
       @turn_number += 1
       turn.pile_cards
@@ -50,6 +50,8 @@ private
       puts "\n\n*~*~*~* #{@player2.name} has won the game! *~*~*~*"
     elsif @player2.has_lost?
       puts "\n\n*~*~*~* #{@player1.name} has won the game! *~*~*~*"
+    elsif @turn_number < 1
+      nil
     else
       puts "\n\n---- DRAW ----"
     end
