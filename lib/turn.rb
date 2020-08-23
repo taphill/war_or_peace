@@ -1,3 +1,10 @@
+# frozen_string_literal: true
+
+# Class to create a turn for the game
+# This class handles the majority of the game logic
+# It will set a turn type as either basic, war, or MAD
+# It will also determine a winner and pile the cards based on the type of turn
+# Lastly it will award the cards to the winner of the turn
 class Turn
   attr_reader :player1, :player2, :type, :winner, :spoils_of_war
 
@@ -16,7 +23,7 @@ class Turn
   end
 
   def set_winner
-    return "No Winner" if @type == :mutually_assured_destruction
+    return 'No Winner' if @type == :mutually_assured_destruction
     return war_winner if @type == :war
     return basic_winner if @type == :basic
   end
@@ -28,7 +35,7 @@ class Turn
   end
 
   def award_spoils
-    return "No spoils to award" if @type == :mutually_assured_destruction
+    return 'No spoils to award' if @type == :mutually_assured_destruction
 
     @spoils_of_war.shuffle.each do |card|
       @winner.deck.add_card(card)
@@ -41,9 +48,9 @@ class Turn
     elsif @type == :war
       print "WAR - #{@winner.name} "
     elsif @type == :mutually_assured_destruction
-      return print "*mutually assured destruction* 6 cards removed from play"
+      return print '*mutually assured destruction* 6 cards removed from play'
     else
-      print "ERROR"
+      print 'ERROR'
     end
 
     print "won #{@spoils_of_war.length} cards"
@@ -51,7 +58,7 @@ class Turn
     print " \t\t------- #{@player1.name} deck = #{@player1.deck_size} ~~~ #{@player2.name} deck = #{@player2.deck_size}"
   end
 
-private
+  private
 
   def mutually_assured_destruction?
     return war? if @player1.deck_size < 3 || @player2.deck_size < 3
@@ -94,8 +101,7 @@ private
   end
 
   def basic_pile
-    @spoils_of_war << @player1.remove_card_from_deck 
+    @spoils_of_war << @player1.remove_card_from_deck
     @spoils_of_war << @player2.remove_card_from_deck
   end
-
 end
